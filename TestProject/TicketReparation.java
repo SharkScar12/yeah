@@ -17,7 +17,8 @@ envoyerEmail() : String
   private String ticketID;
   private String description;
   private boolean[] categories;
-  private boolean affichage;
+  //0 est false et 1 est true
+  private byte affichage;
   File ficherNoTicket;
   
   //Constructeurs de CompteGUI
@@ -36,10 +37,10 @@ envoyerEmail() : String
     this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     this.categories = new boolean[] 
       {false, false, false, false, false, false, false, false};
-    this.affichage = true;
+    this.affichage = 0;
   }
   //blyat
-  TicketReparation(String ticketE, int compteE, String emailE, String descriptionE, boolean[] categoriesE, boolean afficheE) {
+  TicketReparation(String ticketE, int compteE, String emailE, String descriptionE, boolean[] categoriesE, byte afficheE) {
     super(compteE, emailE);
     try {
       ficherNoTicket = new File("ticketTotal.txt");
@@ -112,17 +113,17 @@ envoyerEmail() : String
   }
   
   //affichage
-  public boolean getAffichage() {
+  public byte getAffichage() {
     return this.affichage;
   }
   
-  public void setAffichage(boolean affichageE) {
+  public void setAffichage(byte affichageE) {
     this.affichage = affichageE;
   }
 
   public void systemeAffiche () {
     System.out.println("Information du ticket : " + ticketID);
-    System.out.println("ID du compte : " + super.getCompteID() + "\nEmail du compte : " + super.getEmail() +  "\nDescription : " + description + "\nCategories : " + categories);
+    System.out.println("ID du compte : " + super.getCompteID() + "\nEmail du compte : " + super.getEmail() +  "\nDescription : " + description + "\nCategories : " + categories + "\nAffichage : " + affichage);
   }
 
    
@@ -137,9 +138,9 @@ envoyerEmail() : String
         for (int i = 0; i < categories.length; i++) {
           categStr += categories[i] + ";";
         }
-        monWriter.println("i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + true);
+        monWriter.println("i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + affichage);
         monWriter.close();
-        System.out.println("Ecrit dans ticket.txt : i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categories + true);
+        System.out.println("Ecrit dans ticket.txt : i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + affichage);
           
     	} catch (IOException e) {
 		    System.out.println("Il y a eu une erreur.");
