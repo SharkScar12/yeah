@@ -38,7 +38,7 @@ envoyerEmail() : String
       {false, false, false, false, false, false, false, false};
     this.affichage = true;
   }
-  
+  //blyat
   TicketReparation(String ticketE, int compteE, String emailE, String descriptionE, boolean[] categoriesE, boolean afficheE) {
     super(compteE, emailE);
     try {
