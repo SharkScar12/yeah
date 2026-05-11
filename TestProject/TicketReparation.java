@@ -126,7 +126,6 @@ envoyerEmail() : String
     System.out.println("ID du compte : " + super.getCompteID() + "\nEmail du compte : " + super.getEmail() +  "\nDescription : " + description + "\nCategories : " + categories + "\nAffichage : " + affichage);
   }
 
-   
   public void creerTicket() {
     try {
       	//Écrit les informations dans tickets.txt

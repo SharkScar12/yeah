@@ -12,6 +12,16 @@ public class GUIit extends JFrame {
 	JPanel left3 = new JPanel();
 	JPanel left4 = new JPanel();
 	JPanel left5 = new JPanel();
+	JTextPane description = new JTextPane();
+	JTextField titreTicket = new JTextField();
+	JTextField info1 = new JTextField("", 10);
+	JTextField info2 = new JTextField("", 10);
+	JTextField info3 = new JTextField("", 10);
+	JTextField info4 = new JTextField("", 10);
+	JTextField info5 = new JTextField("", 10);
+	JTextField info6 = new JTextField("", 10);
+	GridLayout baseGrid = new GridLayout(7,1);
+	
 	public GUIit () {
 		super ("GUIit");
 		setSize(500,500);
@@ -43,6 +53,18 @@ public class GUIit extends JFrame {
 		leftPanel.add(left3);
 		leftPanel.add(left4);
 		leftPanel.add(left5);
+		
+		topPanel.setLayout(baseGrid);
+		topPanel.add(description);
+		topPanel.add(info1);
+		topPanel.add(info2);
+		topPanel.add(info3);
+		topPanel.add(info4);
+		topPanel.add(info5);
+		topPanel.add(info6);
 		setVisible(true);
 	}
+	
+	
+	
 }
