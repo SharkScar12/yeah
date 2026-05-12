@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class GUIcreation extends JFrame {
+public class GUIcreation extends JFrame implements ActionListener{
 	JPanel rightPanel = new JPanel();
 	JPanel rightTopPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
@@ -16,8 +16,11 @@ public class GUIcreation extends JFrame {
 	JCheckBox box6 = new JCheckBox("Logiciel");
 	JCheckBox[] boxCateg = {box1, box2, box3, box4, box5, box6};
 	JTextPane categories = new JTextPane();
-	JTextPane description = new JTextPane();
+	JTextArea description = new JTextArea();
+	JScrollPane scrollPane = new JScrollPane(description);
 	JTextPane descriptionInst = new JTextPane();
+	JButton butEnv = new JButton("Envoyer");
+	TicketReparation thisTicket = new TicketReparation();
 
 	public GUIcreation () {
 		super ("GUIcreation");
@@ -51,7 +54,8 @@ public class GUIcreation extends JFrame {
 		
 		gbc.gridy = 2;
 		gbc.weighty = 0.2;
-		leftPanel.add(description, gbc);
+		description.setLineWrap(true);
+		leftPanel.add(scrollPane, gbc);
 		gbc.gridy = 0;
 		gbc.weighty = 0.5;
 		gbc.gridx = 1;
@@ -65,8 +69,8 @@ public class GUIcreation extends JFrame {
 		gbc.weighty = 0.18;
 		rightBottomPanel.setBackground(Color.blue);
 		rightPanel.add(rightBottomPanel, gbc);
-		
 		setVisible(true);
+		
 	}
 }
 
