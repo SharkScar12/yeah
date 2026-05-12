@@ -72,6 +72,53 @@ public class GUIit extends JFrame {
 		setVisible(true);
 	}
 	
+	//Lit fichier pour initialiser un objet TicketReparation
+	  public void lireTicketFicher(String noTicket) {
+	    int noTick = Integer.parseInt(noTicket.substring(1));
+	    String[] tickLn = trouveTicketID(noTicket, "").split(";");
+	    boolean[] categ = new boolean[boxCateg.length];
+	    for (int i = 0; i < boxCateg.length; i++) {
+	      categ[i] = Boolean.parseBoolean(tickLn[4+i]);
+	    }
+	    //Créer nouveau objet avec info
+	    TicketReparation temp = new TicketReparation(tickLn[0], Integer.parseInt(tickLn[1]), tickLn[2], tickLn[3], categ, Byte.parseByte(tickLn[tickLn.length - 1]));
+	    temp.systemeAffiche();
+	  }
+	
+	//Méthode de recherche pour un ticket en particulier, retourne les information de la ligne spécifique auquel le ticket est stocké
+	  //Variable output contient sois "offset" ou quelque chose d'autre pour déterminer la valeur retournée (offset retourne la valeur du dernier byte de la ligne sous forme String, sinon il retourne la ligne du ticket)
+	public String trouveTicketID (String tickID, String output) {
+	    try {
+	      File monFichier = new File("Temp/ticket2.txt");
+	      Scanner lecteurTicket = new Scanner(monFichier);
+	      boolean trouver = false;
+	      
+	      while ((lecteurTicket.hasNextLine()) && (trouver == false)) { 
+	        String info = lecteurTicket.nextLine(); 
+	        //Detection de l'ID du ticket dans la ligne complete
+	        if (info.contains(tickID)) { 
+	          System.out.println("Found match: " + info); 
+	          String[] ticketLn = info.split(";");
+	          //Assure que l'ID trouver etait dans la section de ticketID
+	          if (ticketLn[0].equals(tickID)) {
+	            trouver = true;
+	            if (output.equals("offset")) {
+	              long offset = lecteurTicket.getFilePointer();
+	              offset += info.length();
+	              return (String) offset; 
+	            } else {
+	              lecteurTicket.close();
+	              return info;
+	            }
+	          }
+	        }
+	      }
+	    } catch (FileNotFoundException f) {
+	      f.printStackTrace();
+	      System.out.println("Fichier non-retrouver (Trouve ticketID)");
+	    }
+	    return "Non-retrouver";
+	  }
 	
 	
 }

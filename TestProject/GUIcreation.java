@@ -69,3 +69,4 @@ public class GUIcreation extends JFrame {
 		setVisible(true);
 	}
 }
+
