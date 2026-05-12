@@ -5,7 +5,7 @@ public class GUIit extends JFrame {
 	JPanel rightPanel = new JPanel();
 	JPanel topPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
-	JPanel bottomPanel = new JPanel();
+	JPanel rightBottomPanel = new JPanel();
 	JPanel leftTop = new JPanel();
 	JPanel left1 = new JPanel();
 	JPanel left2 = new JPanel();
@@ -13,41 +13,34 @@ public class GUIit extends JFrame {
 	JPanel left4 = new JPanel();
 	JPanel left5 = new JPanel();
 	JTextPane description = new JTextPane();
-	JTextPane notes = new JTextPane();
+	JTextArea notes = new JTextArea();
+	JScrollPane scrollPane = new JScrollPane(notes);
 	JLabel titreTicket = new JLabel();
 	JButton confirmeResolution = new JButton();
-	JLabel info1 = new JLabel("", 10);
-	JLabel info2 = new JLabel("", 10);
-	JLabel info3 = new JLabel("", 10);
-	JLabel info4 = new JLabel("", 10);
-	JLabel info5 = new JLabel("", 10);
-	JLabel info6 = new JLabel("", 10);
+	JTextPane[] infos = new JTextPane[6];
+
 	GridLayout baseGrid = new GridLayout(7,1);
 	FlowLayout flowthing = new FlowLayout();
 	
 	public GUIit () {
 		super ("GUIit");
 		setSize(500,500);
-		getContentPane().setLayout(new GridBagLayout());
-		
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 		GridBagConstraints gbc = new GridBagConstraints();
-	    gbc.fill = GridBagConstraints.BOTH;
+		this.add(leftPanel);
+		this.add(rightPanel);
+		gbc.fill = GridBagConstraints.BOTH;
 	    gbc.weightx = 0.5;
 	    gbc.weighty = 0.5;
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
-		rightPanel.setLayout(new GridBagLayout());
-		this.add(leftPanel, gbc);
-		gbc.gridx = 1;
-		this.add(rightPanel, gbc);
-	    gbc.gridx = 0;
-	    topPanel.setBackground(Color.black);
-		rightPanel.add(topPanel, gbc);
+		/*rightPanel.setLayout(new GridBagLayout());
+		rightPanel.add(rightRightTopPanel, gbc);
 		gbc.gridy = 1;
-		gbc.weighty = 0.15;
-		bottomPanel.setBackground(Color.blue);
-		bottomPanel.setLayout(new GridLayout(1,2));
-		rightPanel.add(bottomPanel, gbc);
+		gbc.weighty = 0.15;*/
+		rightBottomPanel.setBackground(Color.blue);
+		rightBottomPanel.setLayout(new GridLayout(1,2));
+		rightPanel.add(rightBottomPanel, gbc);
 		left3.setBackground(Color.RED);
 		leftTop.setBackground(Color.green);
 		leftPanel.setLayout(new GridLayout(6,0));
@@ -58,17 +51,29 @@ public class GUIit extends JFrame {
 		leftPanel.add(left4);
 		leftPanel.add(left5);
 		
-		topPanel.setLayout(baseGrid);
-		topPanel.add(info1);
-		topPanel.add(info2);
-		topPanel.add(info3);
-		topPanel.add(info4);
-		topPanel.add(info5);
-		topPanel.add(info6);
+	    /*RightTopPanel.setBackground(Color.yellow);
+		rightTopPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+		for(int i = 0; i<6; i++) {
+			infos[i] = new JTextPane();
+		}
+		infos[0].setText("1");
+		infos[1].setText("2");
+		infos[2].setText("3");
+		infos[3].setText("4");
+		infos[4].setText("5");
+		infos[5].setText("6");
+		for(int i = 0; i<6; i++) {
+			rightTopPanel.add(infos[i]);
+		}
+
+		
 		description.setEditable(false);
-		topPanel.add(description);
-		bottomPanel.add(notes);
-		bottomPanel.add(confirmeResolution);
+		rightTopPanel.add(description);
+		notes.setLineWrap(true);
+		rightBottomPanel.add(scrollPane);
+		rightBottomPanel.add(confirmeResolution);*/
+		leftPanel.setBackground(Color.green);
+		rightPanel.setBackground(Color.cyan);
 		setVisible(true);
 	}
 	
