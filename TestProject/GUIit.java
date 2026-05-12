@@ -13,14 +13,17 @@ public class GUIit extends JFrame {
 	JPanel left4 = new JPanel();
 	JPanel left5 = new JPanel();
 	JTextPane description = new JTextPane();
-	JTextField titreTicket = new JTextField();
-	JTextField info1 = new JTextField("", 10);
-	JTextField info2 = new JTextField("", 10);
-	JTextField info3 = new JTextField("", 10);
-	JTextField info4 = new JTextField("", 10);
-	JTextField info5 = new JTextField("", 10);
-	JTextField info6 = new JTextField("", 10);
+	JTextPane notes = new JTextPane();
+	JLabel titreTicket = new JLabel();
+	JButton confirmeResolution = new JButton();
+	JLabel info1 = new JLabel("", 10);
+	JLabel info2 = new JLabel("", 10);
+	JLabel info3 = new JLabel("", 10);
+	JLabel info4 = new JLabel("", 10);
+	JLabel info5 = new JLabel("", 10);
+	JLabel info6 = new JLabel("", 10);
 	GridLayout baseGrid = new GridLayout(7,1);
+	FlowLayout flowthing = new FlowLayout();
 	
 	public GUIit () {
 		super ("GUIit");
@@ -43,6 +46,7 @@ public class GUIit extends JFrame {
 		gbc.gridy = 1;
 		gbc.weighty = 0.15;
 		bottomPanel.setBackground(Color.blue);
+		bottomPanel.setLayout(new GridLayout(1,2));
 		rightPanel.add(bottomPanel, gbc);
 		left3.setBackground(Color.RED);
 		leftTop.setBackground(Color.green);
@@ -55,13 +59,16 @@ public class GUIit extends JFrame {
 		leftPanel.add(left5);
 		
 		topPanel.setLayout(baseGrid);
-		topPanel.add(description);
 		topPanel.add(info1);
 		topPanel.add(info2);
 		topPanel.add(info3);
 		topPanel.add(info4);
 		topPanel.add(info5);
 		topPanel.add(info6);
+		description.setEditable(false);
+		topPanel.add(description);
+		bottomPanel.add(notes);
+		bottomPanel.add(confirmeResolution);
 		setVisible(true);
 	}
 	
