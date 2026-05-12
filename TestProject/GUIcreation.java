@@ -62,7 +62,7 @@ public class GUIcreation extends JFrame {
 	    rightTopPanel.setBackground(Color.black);
 		rightPanel.add(rightTopPanel, gbc);
 		gbc.gridy = 1;
-		gbc.weighty = 0.15;
+		gbc.weighty = 0.18;
 		rightBottomPanel.setBackground(Color.blue);
 		rightPanel.add(rightBottomPanel, gbc);
 		
