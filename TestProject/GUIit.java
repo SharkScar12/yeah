@@ -6,7 +6,7 @@ public class GUIit extends JFrame {
 	JPanel topPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
 	JPanel rightBottomPanel = new JPanel();
-	JTextField leftTop = new TextField();
+	JTextField leftTop = new JTextField();
 	JTextField left1 = new JTextField();
 	JTextField left2 = new JTextField();
 	JTextField left3 = new JTextField();
@@ -68,5 +68,15 @@ public class GUIit extends JFrame {
 		
 		setVisible(true);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
