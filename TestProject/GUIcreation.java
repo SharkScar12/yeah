@@ -82,3 +82,4 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    }
 	}
 }
+
