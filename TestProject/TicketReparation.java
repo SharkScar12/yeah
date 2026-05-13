@@ -187,6 +187,7 @@ envoyerEmail() : String
       Scanner lecteurTicket = new Scanner(fichierTickets);
       boolean trouver = false;
       
+      //Passe ligne par ligne pour trouver le ID de ticket (Similaire au RandomAccessFile)
       while ((lecteurTicket.hasNextLine()) && (trouver == false)) { 
         String info = lecteurTicket.nextLine(); 
         //Detection de l'ID du ticket dans la ligne complete
