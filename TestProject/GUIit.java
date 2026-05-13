@@ -69,7 +69,9 @@ rightPanel.setBackground(Color.cyan);
 setVisible(true);
 }
 
-
+	public void actionPerformed (ActionEvent actionEvent ) {
+		
+	}
 
 
 
