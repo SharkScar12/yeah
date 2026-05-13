@@ -1,17 +1,17 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class GUIit extends JFrame {
+public class GUIit extends JFrame implements ActionListener {
 	JPanel rightPanel = new JPanel();
 	JPanel topPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
 	JPanel rightBottomPanel = new JPanel();
-	JTextField leftTop = new JTextField();
-	JTextField left1 = new JTextField();
-	JTextField left2 = new JTextField();
-	JTextField left3 = new JTextField();
-	JTextField left4 = new JTextField();
-	JTextField left5 = new JTextField();
+	JPanel leftTop = new JPanel();
+	JPanel left1 = new JPanel();
+	JPanel left2 = new JPanel();
+	JPanel left3 = new JPanel();
+	JPanel left4 = new JPanel();
+	JPanel left5 = new JPanel();
 	JTextPane test = new JTextPane();
 	JTextPane description = new JTextPane();
 	JTextArea notes = new JTextArea();
@@ -60,8 +60,9 @@ public class GUIit extends JFrame {
 		description.setEditable(false);
 		rightPanel.add(description);
 		notes.setLineWrap(true);
-		rightBottomPanel.add(scrollPane);
+		/*rightBottomPanel.add(scrollPane);*/
 		rightBottomPanel.add(confirmeResolution);
+		confirmeResolution.setText("Soummetre la résolution de problème.");
 		rightPanel.add(rightBottomPanel);
 		leftPanel.setBackground(Color.green);
 		rightPanel.setBackground(Color.cyan);
@@ -69,7 +70,9 @@ public class GUIit extends JFrame {
 		setVisible(true);
 	}
 	
-	
+	public void actionPerformed (ActionEvent actionEvent ) {
+		
+	}
 	
 	
 	
