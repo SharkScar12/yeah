@@ -209,6 +209,7 @@ envoyerEmail() : String
     }
     return "Ticket non-retrouver";
   }
+
   
   
   //Lit fichier pour initialiser un objet TicketReparation
@@ -230,7 +231,8 @@ envoyerEmail() : String
     //Affiche les nouvelles informations
     systemeAffiche();
   }
-  
+
+
   public void creerTicket() {
     try {
       	//Écrit les informations dans tickets.txt
