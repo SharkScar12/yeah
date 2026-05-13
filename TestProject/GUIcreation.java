@@ -6,6 +6,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JPanel rightTopPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
 	JPanel leftTopPanel = new JPanel();
+	JPanel leftMiddlePanel = new JPanel();
 	JPanel leftBottomPanel = new JPanel();
 	JPanel rightBottomPanel = new JPanel();
 	JCheckBox box1 = new JCheckBox("Plug");
@@ -20,12 +21,14 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JScrollPane scrollPane = new JScrollPane(description);
 	JTextPane descriptionInst = new JTextPane();
 	JButton butEnv = new JButton("Envoyer");
+	JButton butIT = new JButton("Mode IT");
 	TicketReparation thisTicket = new TicketReparation();
 	
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(500,500);
 		butEnv.addActionListener(this);
+		butIT.addActionListener(this);
 		getContentPane().setLayout(new GridLayout(1,1));
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH;
@@ -44,23 +47,26 @@ public class GUIcreation extends JFrame implements ActionListener{
 			gbc.gridy = i+1;
 			leftTopPanel.add(boxCateg[i], gbc);
 		}
-		gbc.gridy = 0;
+		gbc.gridy = 1;
 		leftPanel.add(leftTopPanel, gbc);
 		
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		gbc.weighty = 0.02;
 		descriptionInst.setText("Entrez une description:");
 		descriptionInst.setEditable(false);
 		leftPanel.add(descriptionInst, gbc);
 		
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		gbc.weighty = 0.2;
 		description.setLineWrap(true);
 		leftPanel.add(scrollPane, gbc);
-		gbc.gridy = 0;
-		gbc.weighty = 0.5;
-		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.weighty = 0.1;
+		leftPanel.add(butEnv, gbc);
 		
+		gbc.gridy = 0;
+		gbc.weighty = 0.001;
+		leftPanel.add(butIT, gbc);
 		/*rightPanel.setLayout(new GridBagLayout());
 		this.add(rightPanel, gbc);
 		gbc.gridx = 0;
