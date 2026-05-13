@@ -26,7 +26,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 		super ("GUIcreation");
 		setSize(500,500);
 		butEnv.addActionListener(this);
-		getContentPane().setLayout(new GridBagLayout());
+		getContentPane().setLayout(new GridLayout(1,1));
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH;
 	    gbc.weightx = 0.5;
@@ -34,15 +34,15 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
 	    leftPanel.setLayout(new GridBagLayout());
-	    this.add(leftPanel, gbc);
+	    this.add(leftPanel);
 	   
 		leftTopPanel.setLayout(new GridBagLayout());
 		categories.setText("Cochez le(s) boîte(s) applicable(s) à votre problème:");
 		categories.setEditable(false);
 	    leftTopPanel.add(categories, gbc);
 		for(int i=0; i<6; i++) {
-			leftTopPanel.add(boxCateg[i], gbc);
 			gbc.gridy = i+1;
+			leftTopPanel.add(boxCateg[i], gbc);
 		}
 		gbc.gridy = 0;
 		leftPanel.add(leftTopPanel, gbc);
@@ -61,17 +61,24 @@ public class GUIcreation extends JFrame implements ActionListener{
 		gbc.weighty = 0.5;
 		gbc.gridx = 1;
 		
-		rightPanel.setLayout(new GridBagLayout());
+		/*rightPanel.setLayout(new GridBagLayout());
 		this.add(rightPanel, gbc);
-	    gbc.gridx = 0;
+		gbc.gridx = 0;
 	    rightTopPanel.setBackground(Color.black);
 		rightPanel.add(rightTopPanel, gbc);
 		gbc.gridy = 1;
 		gbc.weighty = 0.18;
 		rightBottomPanel.setBackground(Color.blue);
 		rightBottomPanel.add(butEnv);
-		rightPanel.add(rightBottomPanel, gbc);
+		rightPanel.add(rightBottomPanel, gbc);*/
 		setVisible(true);
 		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	    if (e.getSource() == butEnv) {
+	        // Ajoutez ici le code à exécuter lors du clic sur le bouton Envoyer
+	        System.out.println("Bouton cliqué !");
+	    }
 	}
 }
