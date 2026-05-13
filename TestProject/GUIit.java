@@ -22,25 +22,39 @@ public class GUIit extends JFrame implements ActionListener {
 
 	GridLayout baseGrid = new GridLayout(7,1);
 	FlowLayout flowthing = new FlowLayout();
-	
+
 	public GUIit () {
 		super ("GUIit");
 		setSize(500,500);
-		getContentPane().setLayout(new GridLayout(1,2));
-		this.add(leftPanel);
-		this.add(rightPanel);
-	    rightPanel.setBackground(Color.yellow);
+		getContentPane().setLayout(new GridBagLayout());
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+	    gbc.fill = GridBagConstraints.BOTH;
+	    gbc.weightx = 0.5;
+	    gbc.weighty = 0.5;
+	    gbc.gridx = 0;
+	    gbc.gridy = 0;
+		rightPanel.setLayout(new GridBagLayout());
+		this.add(leftPanel, gbc);
+		gbc.gridx = 1;
+		this.add(rightPanel, gbc);
+	    gbc.gridx = 0;
+	    topPanel.setBackground(Color.black);
+		rightPanel.add(topPanel, gbc);
+		gbc.gridy = 1;
+		gbc.weighty = 0.15;
 		rightBottomPanel.setBackground(Color.blue);
-		rightBottomPanel.setLayout(new GridLayout(1,2));
+		rightPanel.add(rightBottomPanel, gbc);
 		left3.setBackground(Color.RED);
 		leftTop.setBackground(Color.green);
-		leftPanel.setLayout(new GridLayout(6,1));
+		leftPanel.setLayout(new GridLayout(6,0));
 		leftPanel.add(leftTop);
 		leftPanel.add(left1);
 		leftPanel.add(left2);
 		leftPanel.add(left3);
 		leftPanel.add(left4);
 		leftPanel.add(left5);
+
 		
 		rightPanel.setLayout(new GridLayout(8,1));
 		for(int i = 0; i<6; i++) {
@@ -67,6 +81,7 @@ public class GUIit extends JFrame implements ActionListener {
 		leftPanel.setBackground(Color.green);
 		rightPanel.setBackground(Color.cyan);
 		
+
 		setVisible(true);
 	}
 	
@@ -77,9 +92,5 @@ public class GUIit extends JFrame implements ActionListener {
 	
 	
 	
-	
-	
-	
-	
-	
+
 }
