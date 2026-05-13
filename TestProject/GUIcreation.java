@@ -21,10 +21,11 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JTextPane descriptionInst = new JTextPane();
 	JButton butEnv = new JButton("Envoyer");
 	TicketReparation thisTicket = new TicketReparation();
-
+	
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(500,500);
+		butEnv.addActionListener(this);
 		getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH;
@@ -68,9 +69,14 @@ public class GUIcreation extends JFrame implements ActionListener{
 		gbc.gridy = 1;
 		gbc.weighty = 0.18;
 		rightBottomPanel.setBackground(Color.blue);
+		rightBottomPanel.add(butEnv);
 		rightPanel.add(rightBottomPanel, gbc);
 		setVisible(true);
 		
 	}
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> branch 'master' of git@github.com:SharkScar12/yeah.git
