@@ -1,2 +1,2 @@
-i1;0;bonjour@gmail.com;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.;false;false;false;false;false;false;false;false;0
+i1;0;bonjour@gmail.com;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.;false;false;true;false;true;false;false;false;0
 i2;0;meuana30@ecolecatholique.ca;;false;false;false;false;false;false;false;false;1
