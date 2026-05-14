@@ -130,6 +130,8 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	thisTicket.setEmail(email.getText());
 	    	thisTicket.setCategories(categTemp);
 	    	thisTicket.systemeAffiche();
+	    	//thisTicket.creerTicket();
+	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    } else if (e.getSource() == butIT) {
 	    	System.out.println("butIT");
 	    }
