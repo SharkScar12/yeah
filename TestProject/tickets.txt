@@ -1,2 +1,5 @@
 i1;0;bonjour@gmail.com;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.;false;false;true;false;true;false;false;false;0
 i2;0;meuana30@ecolecatholique.ca;;false;false;false;false;false;false;false;false;1
+i3;0;roujea08@ecolecatholique.ca;this is weird;false;true;true;false;false;true;1
+i4;0;mereva29@ecolecatholique.ca;plswork;true;true;true;true;true;true;1
+i5;0;roswil17@ecolecatholique.ca;hes goofy; false;false;false;false;false;false;1
