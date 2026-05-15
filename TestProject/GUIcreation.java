@@ -75,6 +75,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    gbc.weighty = 0.95;
 	    this.add(leftPanel, gbc);
 	    gbc.weighty = 0.5;
+	    gbc.gridy = 0;
 		leftTopPanel.setLayout(new GridBagLayout());
 		categories.setText("Cochez le(s) boîte(s) applicable(s) à votre problème:");
 		categories.setEditable(false);
@@ -134,6 +135,8 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    } else if (e.getSource() == butIT) {
 	    	System.out.println("butIT");
+			GUIit testing2 = new GUIit();
+	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    }
 	}
 	 public void prendCategories () {
