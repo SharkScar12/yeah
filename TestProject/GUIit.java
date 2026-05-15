@@ -7,7 +7,7 @@ public class GUIit extends JFrame implements ActionListener{
 	JPanel topPanel = new JPanel();
 	JPanel leftPanel = new JPanel();
 	JPanel rightBottomPanel = new JPanel();
-	JButton leftTop = new JButton();
+	JPanel leftTop = new JPanel();
 	JButton left1 = new JButton();
 	JButton left2 = new JButton();
 	JButton left3 = new JButton();
@@ -20,6 +20,8 @@ public class GUIit extends JFrame implements ActionListener{
 	JLabel titreTicket = new JLabel();
 	JButton confirmeResolution = new JButton();
 	JLabel[] infos = new JLabel[6];
+	JButton prochainepage = new JButton();
+	JButton pageprecedente = new JButton();
 
 	GridLayout baseGrid = new GridLayout(7,1);
 	FlowLayout flowthing = new FlowLayout();
@@ -32,6 +34,8 @@ public class GUIit extends JFrame implements ActionListener{
 	TicketReparation ticket5 = new TicketReparation();
 	TicketReparation[] tabTicekt = {ticket1, ticket2, ticket3, ticket4, ticket5};
 //tabTicekt[0].lireTicketFichier("i6");
+	int numTicket = 1;
+	int ticketresolu = 0;
 	public GUIit () {
 			super ("GUIit");
 			setSize(500,500);
@@ -45,7 +49,16 @@ public class GUIit extends JFrame implements ActionListener{
 			leftTop.setBackground(Color.green);
 			leftPanel.setLayout(new GridLayout(6,1));
 			leftPanel.add(leftTop);
+			leftTop.setLayout(new GridLayout(1,2));
+			leftTop.add(pageprecedente);
+			pageprecedente.setVisible(false);
+			pageprecedente.setText("Page précédente");
+			prochainepage.setText("Prochaine page");
+			leftTop.add(prochainepage);
+			prochainepage.addActionListener(this);
+			pageprecedente.addActionListener(this);
 			leftPanel.add(left1);
+			left1.setText("");
 			left1.addActionListener(this);
 			leftPanel.add(left2);
 			left2.addActionListener(this);
@@ -60,7 +73,7 @@ public class GUIit extends JFrame implements ActionListener{
 			for(int i = 0; i<6; i++) {
 				infos[i] = new JLabel();
 			}
-			infos[0].setText("Problème d'alimentation : ");
+			infos[0].setText("Les problèmes");
 			infos[1].setText("Des");
 			infos[2].setText("Élèves");
 			infos[3].setText("Serons");
@@ -85,55 +98,100 @@ public class GUIit extends JFrame implements ActionListener{
 			
 			//initialize the tickets themselves in the buttons
 	}
-
+	//les Action Listeners pour sélectionner les tickets de l'affichage rapide
 	public void actionPerformed (ActionEvent actionEvent ) {
 		int i = 0;
+		ticketresolu = 0;
+		System.out.println(ticketresolu);
 		String[] affichage = {"Problème d'alimentation : ", "Câble brisé : ","Écran brisé : ", "Batterie défectueuse : ", "Ne s'allume pas : ", "Problème logiciel : "};
 		if (actionEvent.getSource() == left1) {
-			ticket1.lireTicketFicher ("i1");
-			boolean[] affiche = ticket1.getCategories();
-			System.out.println(affiche[1]);
-			for ( i = 0; i <6; i++) {
-				infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+			tabTicekt[0].lireTicketFicher ("i" + (numTicket));
+			//cheker si le ticket est résolu ou non
+			if (tabTicekt[0].getAffichage() == 1) {
+				boolean[] affiche = tabTicekt[0].getCategories();
+				System.out.println(affiche[1]);
+				for ( i = 0; i <6; i++) {
+					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+				}
+				description.setText(tabTicekt[0].getDescription());
+				ticketresolu = numTicket;
+				System.out.println(ticketresolu);
+			} else {
+				description.setText("Ticket Résolu");
 			}
-			description.setText(ticket1.getDescription());
 		}
 		if (actionEvent.getSource() == left2) {
-			ticket2.lireTicketFicher ("i2");
-			boolean[] affiche = ticket2.getCategories();
-			System.out.println(affiche[1]);
-			for ( i = 0; i <6; i++) {
-				infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+			tabTicekt[1].lireTicketFicher ("i" + (numTicket + 1));
+			if (tabTicekt[1].getAffichage() == 1) {
+				boolean[] affiche = tabTicekt[1].getCategories();
+				System.out.println(affiche[1]);
+				for ( i = 0; i <6; i++) {
+					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+				}
+				description.setText(tabTicekt[1].getDescription());
+				ticketresolu = numTicket + 1;
+				System.out.println(ticketresolu);
+			} else {
+				description.setText("Ticket Résolu");
 			}
-			description.setText(ticket2.getDescription());
 		}
 		if (actionEvent.getSource() == left3) {
-			ticket3.lireTicketFicher ("i3");
-			boolean[] affiche = ticket3.getCategories();
-			System.out.println(affiche[1]);
-			for ( i = 0; i <6; i++) {
-				infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+			tabTicekt[2].lireTicketFicher ("i" + (numTicket + 2));
+			if (tabTicekt[2].getAffichage() == 1) {
+				boolean[] affiche = tabTicekt[2].getCategories();
+				System.out.println(affiche[1]);
+				for ( i = 0; i <6; i++) {
+					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+				}
+				description.setText(tabTicekt[2].getDescription());
+				ticketresolu = numTicket + 2;
+				System.out.println(ticketresolu);
+			} else {
+				description.setText("Ticket Résolu");
 			}
-			description.setText(ticket3.getDescription());
 		}
 		if (actionEvent.getSource() == left4) {
-			ticket4.lireTicketFicher ("i4");
-			boolean[] affiche = ticket4.getCategories();
-			System.out.println(affiche[1]);
-			for ( i = 0; i <6; i++) {
-				infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+			tabTicekt[3].lireTicketFicher ("i" + (numTicket + 3));
+			if (tabTicekt[3].getAffichage() == 1) {
+				boolean[] affiche = tabTicekt[3].getCategories();
+				System.out.println(affiche[1]);
+				for ( i = 0; i <6; i++) {
+					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+				}
+				description.setText(tabTicekt[3].getDescription());
+				ticketresolu = numTicket + 3;
+				System.out.println(ticketresolu);
+			} else {
+				description.setText("Ticket Résolu");
 			}
-			description.setText(ticket4.getDescription());
 		}
 		if (actionEvent.getSource() == left5) {
-			ticket5.lireTicketFicher ("i5");
-			boolean[] affiche = ticket5.getCategories();
-			System.out.println(affiche[1]);
-			for ( i = 0; i <6; i++) {
-				infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+			tabTicekt[4].lireTicketFicher ("i" + (numTicket + 4));
+			if (tabTicekt[4].getAffichage() == 1) {
+				boolean[] affiche = tabTicekt[4].getCategories();
+				System.out.println(affiche[1]);
+				for ( i = 0; i <6; i++) {
+					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
+				}
+				description.setText(tabTicekt[1].getDescription());
+				ticketresolu = numTicket + 4;
+				System.out.println(ticketresolu);
+			} else {
+				description.setText("Ticket Résolu");
 			}
-			description.setText(ticket4.getDescription());
 		}
+		if (actionEvent.getSource() == prochainepage) {
+			numTicket = numTicket + 5;
+		}
+		if (actionEvent.getSource() == (confirmeResolution)) {
+			tabTicekt[ticketresolu].setAffichage((byte) 0);
+		}
+	}
+	public void afficheProbleme(int nombreTicket) {
+		
+		
+		
+		
 	}
 
 }
