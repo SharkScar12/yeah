@@ -1,15 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.event.*;
 public class GUIcreation extends JFrame implements ActionListener{
-	JPanel rightPanel = new JPanel();
-	JPanel rightTopPanel = new JPanel();
-	JPanel leftPanel = new JPanel();
+	JPanel centerPanel = new JPanel();
 	JPanel topPanel = new JPanel();
-	JPanel leftTopPanel = new JPanel();
-	JPanel leftMiddlePanel = new JPanel();
-	JPanel leftBottomPanel = new JPanel();
-	JPanel rightBottomPanel = new JPanel();
+	JPanel centerTopPanel = new JPanel();
 	JCheckBox box1 = new JCheckBox("Plug");
 	JCheckBox box2 = new JCheckBox("Cable");
 	JCheckBox box3 = new JCheckBox("Ecran");
@@ -30,27 +26,29 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JTextArea email = new JTextArea();
 	JScrollPane idScroll = new JScrollPane(id);
 	JScrollPane emailScroll = new JScrollPane(email);
-	boolean[] categTemp = new boolean[boxCateg.length];
+	boolean[] categTemp = new boolean[boxCateg.length]; //Boolean pour envoyer les valeurs des checkbox à l'objet
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(700,500);
-		butEnv.addActionListener(this);
+		
+		//Ajout du ActionListener
+		butEnv.addActionListener(this); 
 		butIT.addActionListener(this);
+		
+		//Création des GridBagLayout.
 		getContentPane().setLayout(new GridBagLayout());
+		centerPanel.setLayout(new GridBagLayout());
+	    topPanel.setLayout(new GridBagLayout());
+		centerTopPanel.setLayout(new GridBagLayout());
+
+		//Création des deux objets contraintes d GridBagLayout.
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH;
 	    gbc.weightx = 0.5;
 	    gbc.weighty = 0.05;
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
-	    leftPanel.setLayout(new GridBagLayout());
-	    this.add(topPanel, gbc);
 	    
-	    idInst.setText("Entrez votre id:");
-	    idInst.setEditable(false);
-	    emailInst.setText("Entrez votre adresse courriel:");
-	    emailInst.setEditable(false);
-	    topPanel.setLayout(new GridBagLayout());
 	    GridBagConstraints forTopPanel = new GridBagConstraints();
 	    forTopPanel.weightx = 0.5;
 	    forTopPanel.gridx = 0;
@@ -58,62 +56,70 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    forTopPanel.weighty = 0.5;
 	    forTopPanel.fill = GridBagConstraints.BOTH;
 	    
+	    //Ajout des éléments au JFrame
+	    this.add(topPanel, gbc);
+	    gbc.gridy = 1;
+	    gbc.weighty = 0.95;
+	    this.add(centerPanel, gbc);
+	    
+	    //Ajout du texte aux éléments textuels
+	    idInst.setText("Entrez votre id:");
+	    emailInst.setText("Entrez votre adresse courriel:");
+		categories.setText("Cochez le(s) boîte(s) applicable(s) à votre problème:");
+		descriptionInst.setText("Entrez une description:");
+
+	    //Ajout des restrictions liées à la modification des éléments textuels
+	    idInst.setEditable(false);
+	    emailInst.setEditable(false);
+		descriptionInst.setEditable(false);
+		categories.setEditable(false);
+
+	    //Ajout des restrictions de dimension aux éléments textuels
 	    idInst.setMaximumSize(new Dimension(200,50));
+	    idScroll.setMinimumSize(new Dimension(150,50));
+	    emailInst.setMaximumSize(new Dimension(200,50));
+	    emailScroll.setMinimumSize(new Dimension(150, 25));
+		description.setLineWrap(true);
+
+
+	    //Ajout des éléments au topPanel
 	    topPanel.add(idInst, forTopPanel);
 	    forTopPanel.gridx = 1;
-	    idScroll.setMinimumSize(new Dimension(150,50));
 	    topPanel.add(idScroll, forTopPanel);
 	    forTopPanel.gridx = 2;
-	    emailInst.setMaximumSize(new Dimension(200,50));
 	    topPanel.add(emailInst, forTopPanel);
 	    forTopPanel.gridx = 3;
-	    emailScroll.setMinimumSize(new Dimension(150, 25));
 	    topPanel.add(emailScroll, forTopPanel);
 	    
 	    
-	    gbc.gridy = 1;
-	    gbc.weighty = 0.95;
-	    this.add(leftPanel, gbc);
+	    //Ajout des checkbox au panneau haut-centrale (à l'interieur du panneau centrale)
 	    gbc.weighty = 0.5;
 	    gbc.gridy = 0;
-		leftTopPanel.setLayout(new GridBagLayout());
-		categories.setText("Cochez le(s) boîte(s) applicable(s) à votre problème:");
-		categories.setEditable(false);
-	    leftTopPanel.add(categories, gbc);
+	    centerTopPanel.add(categories, gbc);
 		for(int i=0; i<6; i++) {
 			gbc.gridy = i+1;
-			leftTopPanel.add(boxCateg[i], gbc);
+			centerTopPanel.add(boxCateg[i], gbc);
 		}
+		
+		//Ajout des éléments au panneau haut
 		gbc.gridy = 2;
-		leftPanel.add(leftTopPanel, gbc);
+		centerPanel.add(centerTopPanel, gbc);
 		
 		gbc.gridy = 3;
 		gbc.weighty = 0.02;
-		descriptionInst.setText("Entrez une description:");
-		descriptionInst.setEditable(false);
-		leftPanel.add(descriptionInst, gbc);
+		centerPanel.add(descriptionInst, gbc);
 		
 		gbc.gridy = 4;
 		gbc.weighty = 0.2;
-		description.setLineWrap(true);
-		leftPanel.add(scrollPane, gbc);
+		centerPanel.add(scrollPane, gbc);
+		
 		gbc.gridy = 5;
 		gbc.weighty = 0.1;
-		leftPanel.add(butEnv, gbc);
+		centerPanel.add(butEnv, gbc);
 		
 		gbc.gridy = 0;
 		gbc.weighty = 0.001;
-		leftPanel.add(butIT, gbc);
-		/*rightPanel.setLayout(new GridBagLayout());
-		this.add(rightPanel, gbc);
-		gbc.gridx = 0;
-	    rightTopPanel.setBackground(Color.black);
-		rightPanel.add(rightTopPanel, gbc);
-		gbc.gridy = 1;
-		gbc.weighty = 0.18;
-		rightBottomPanel.setBackground(Color.blue);
-		rightBottomPanel.add(butEnv);
-		rightPanel.add(rightBottomPanel, gbc);*/
+		centerPanel.add(butIT, gbc);
 		setVisible(true);
 		
 	}
@@ -122,17 +128,27 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    if (e.getSource() == butEnv) {
 	        // Ajoutez ici le code à exécuter lors du clic sur le bouton Envoyer
 	    	System.out.println("butEnv");
-	    	thisTicket.setDescription(description.getText());
 	    	try {
-	    	thisTicket.setCompteID(Integer.parseInt(id.getText()));
+	    		if(email.getText().contains("@") == true && email.getText().contains(".") == true && email.getText().contains(" ") == false ) {
+	    			thisTicket.setCompteID(Integer.parseInt(id.getText()));
+	    	    	thisTicket.setEmail(email.getText());
+	    	    	thisTicket.setCategories(categTemp);
+	    	    	thisTicket.setDescription(description.getText());
+	    	    	thisTicket.systemeAffiche();
+	    	    	//thisTicket.creerTicket();
+	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    		} else {
+	    			invalidEntryStyle(descriptionInst);
+	    			descriptionInst.setText("Insérez un adress courriel valide!");
+	    			email.setBackground(Color.yellow);
+	    		}
+	    	
 	    	} catch(NumberFormatException f) {
+	    		descriptionInst.setText("Assurez-vous de remplir votre ID d'étudiant!");
+	    		id.setBackground(Color.yellow);
 	    		System.out.println("e");
 	    	}
-	    	thisTicket.setEmail(email.getText());
-	    	thisTicket.setCategories(categTemp);
-	    	thisTicket.systemeAffiche();
-	    	//thisTicket.creerTicket();
-	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    	
 	    } else if (e.getSource() == butIT) {
 	    	System.out.println("butIT");
 			GUIit testing2 = new GUIit();
@@ -148,5 +164,21 @@ public class GUIcreation extends JFrame implements ActionListener{
 		      }
 		    }
 		  }
-}
+	 public void invalidEntryStyle (JTextPane text) {
+			SimpleAttributeSet invalidEntry = new SimpleAttributeSet();
+			StyleConstants.setBold(invalidEntry, true);
+			StyleConstants.setFontSize(invalidEntry, 18);
+			text.setCharacterAttributes(invalidEntry, true);
+		}
+/*
+	 import org.apache.commons.validator.routines.EmailValidator;
 
+	 public class Main {
+	     public static void main(String[] args) {
+	         EmailValidator validator = EmailValidator.getInstance();
+	         boolean isValid = validator.isValid("example@domain.com");
+	         System.out.println("Is valid: " + isValid);
+	     }
+	 }
+*/
+}
