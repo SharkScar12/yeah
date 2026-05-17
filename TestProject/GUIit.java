@@ -1,6 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class GUIit extends JFrame implements ActionListener{
 	JPanel rightPanel = new JPanel();
@@ -33,9 +36,31 @@ public class GUIit extends JFrame implements ActionListener{
 	TicketReparation ticket4 = new TicketReparation();
 	TicketReparation ticket5 = new TicketReparation();
 	TicketReparation[] tabTicekt = {ticket1, ticket2, ticket3, ticket4, ticket5};
+	
+	public int getTotalTicket() {
+		int count = 0;
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("tickets.txt"));
+
+			while (reader.readLine() != null) {
+				count++;
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+	
 //tabTicekt[0].lireTicketFichier("i6");
 	int numTicket = 1;
 	int ticketresolu = 0;
+	int totalTickets;
+	
 	public GUIit () {
 			super ("GUIit");
 			setSize(500,500);
@@ -51,10 +76,9 @@ public class GUIit extends JFrame implements ActionListener{
 			leftPanel.add(leftTop);
 			leftTop.setLayout(new GridLayout(1,2));
 			leftTop.add(pageprecedente);
-			pageprecedente.setVisible(false);
 			pageprecedente.setText("Page précédente");
-			prochainepage.setText("Prochaine page");
 			leftTop.add(prochainepage);
+			prochainepage.setText("Prochaine page");
 			prochainepage.addActionListener(this);
 			pageprecedente.addActionListener(this);
 			leftPanel.add(left1);
@@ -94,6 +118,22 @@ public class GUIit extends JFrame implements ActionListener{
 			rightPanel.add(rightBottomPanel);
 			leftPanel.setBackground(Color.green);
 			rightPanel.setBackground(Color.cyan);
+			
+			//Charger les 5 premiers billets de la page actuelle
+			for (int i = 0; i < 5; i++) {
+	            tabTicekt[i].lireTicketFicher("i" + (numTicket + i));
+	        }
+			totalTickets = getTotalTicket();
+			System.out.println("DEBUG totalTickets = " + totalTickets + ", numTicket = " + numTicket);
+			//texte des boutons à partir des billets chargés
+			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
+			left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
+			left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
+			left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
+			left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+			
+			updatePageButtons();
+			
 			setVisible(true);
 			
 			//initialize the tickets themselves in the buttons
@@ -104,8 +144,8 @@ public class GUIit extends JFrame implements ActionListener{
 		ticketresolu = 0;
 		System.out.println(ticketresolu);
 		String[] affichage = {"Problème d'alimentation : ", "Câble brisé : ","Écran brisé : ", "Batterie défectueuse : ", "Ne s'allume pas : ", "Problème logiciel : "};
+		
 		if (actionEvent.getSource() == left1) {
-			tabTicekt[0].lireTicketFicher ("i" + (numTicket));
 			//cheker si le ticket est résolu ou non
 			if (tabTicekt[0].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[0].getCategories();
@@ -121,7 +161,6 @@ public class GUIit extends JFrame implements ActionListener{
 			}
 		}
 		if (actionEvent.getSource() == left2) {
-			tabTicekt[1].lireTicketFicher ("i" + (numTicket + 1));
 			if (tabTicekt[1].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[1].getCategories();
 				System.out.println(affiche[1]);
@@ -136,7 +175,6 @@ public class GUIit extends JFrame implements ActionListener{
 			}
 		}
 		if (actionEvent.getSource() == left3) {
-			tabTicekt[2].lireTicketFicher ("i" + (numTicket + 2));
 			if (tabTicekt[2].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[2].getCategories();
 				System.out.println(affiche[1]);
@@ -151,7 +189,6 @@ public class GUIit extends JFrame implements ActionListener{
 			}
 		}
 		if (actionEvent.getSource() == left4) {
-			tabTicekt[3].lireTicketFicher ("i" + (numTicket + 3));
 			if (tabTicekt[3].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[3].getCategories();
 				System.out.println(affiche[1]);
@@ -166,14 +203,13 @@ public class GUIit extends JFrame implements ActionListener{
 			}
 		}
 		if (actionEvent.getSource() == left5) {
-			tabTicekt[4].lireTicketFicher ("i" + (numTicket + 4));
 			if (tabTicekt[4].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[4].getCategories();
 				System.out.println(affiche[1]);
 				for ( i = 0; i <6; i++) {
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
-				description.setText(tabTicekt[1].getDescription());
+				description.setText(tabTicekt[4].getDescription());
 				ticketresolu = numTicket + 4;
 				System.out.println(ticketresolu);
 			} else {
@@ -182,6 +218,33 @@ public class GUIit extends JFrame implements ActionListener{
 		}
 		if (actionEvent.getSource() == prochainepage) {
 			numTicket = numTicket + 5;
+			
+			for (int j = 0; j < 5; j++) {
+                tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
+            }
+			
+			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
+            left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
+            left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
+            left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
+            left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+            updatePageButtons();
+		}
+		if (actionEvent.getSource() == pageprecedente) {
+
+		    numTicket = numTicket - 5;
+
+		    for (int j = 0; j < 5; j++) {
+		        tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
+		    }
+
+		    left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
+		    left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
+		    left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
+		    left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
+		    left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+
+		    updatePageButtons();
 		}
 		if (actionEvent.getSource() == (confirmeResolution)) {
 			tabTicekt[ticketresolu].setAffichage((byte) 0);
@@ -193,6 +256,11 @@ public class GUIit extends JFrame implements ActionListener{
 		
 		
 	}
+	
+	private void updatePageButtons() {
+		pageprecedente.setEnabled(numTicket > 1);                   // Activer seulement si ce n'est pas la première page
+		prochainepage.setEnabled(numTicket + 5 <= totalTickets);     // Activer seulement si la page suivante existe
+    }
 
 }
 	
