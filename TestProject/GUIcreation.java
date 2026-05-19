@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.event.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class GUIcreation extends JFrame implements ActionListener{
 	JPanel centerPanel = new JPanel();
 	JPanel topPanel = new JPanel();
@@ -129,8 +131,9 @@ public class GUIcreation extends JFrame implements ActionListener{
 	        // Ajoutez ici le code à exécuter lors du clic sur le bouton Envoyer
 	    	System.out.println("butEnv");
 	    	try {
-	    		if(email.getText().contains("@") == true && email.getText().contains(".") == true && email.getText().contains(" ") == false ) {
-	    			thisTicket.setCompteID(Integer.parseInt(id.getText()));
+	    		if(isValid(email.getText()) == true) {
+	    			//C'est à la prochaine ligne où l'erreur serait dans le cas d'ID invalide.
+	    			thisTicket.setCompteID(Integer.parseInt(id.getText())); 
 	    	    	thisTicket.setEmail(email.getText());
 	    	    	thisTicket.setCategories(categTemp);
 	    	    	thisTicket.setDescription(description.getText());
@@ -155,6 +158,8 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    }
 	}
+	//Méthode qui recueille les donnés des boîtes et associe à un booléan de l'objet.
+	//Appelée lorsque le bouton envoyer est cliqué et les entrés sont valides.
 	 public void prendCategories () {
 		    for (int i = 0; i > boxCateg.length; i++) {
 		      if (boxCateg[i].isSelected()) {
@@ -164,21 +169,28 @@ public class GUIcreation extends JFrame implements ActionListener{
 		      }
 		    }
 		  }
+	 //Méthode qui change la couleur et grandeur d'une boite texte pour indiquer l'erreur dans leurs infos.
 	 public void invalidEntryStyle (JTextPane text) {
 			SimpleAttributeSet invalidEntry = new SimpleAttributeSet();
 			StyleConstants.setBold(invalidEntry, true);
 			StyleConstants.setFontSize(invalidEntry, 18);
 			text.setCharacterAttributes(invalidEntry, true);
 		}
-/*
-	 import org.apache.commons.validator.routines.EmailValidator;
+	 
+	 
+	 	//https://stackoverflow.com/questions/8204680/java-regex-email
+	 	//paramêtres des charectères
+	 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+	 	//associe à l'objet qui fait la vérification
+	    private static final Pattern PATTERN = Pattern.compile(EMAIL_REGEX);
+	    //vérifie si la boîte est null, dans ce cas c'est toujour invalide
+	    public static boolean isValid(String email) {
+	        if (email == null) {
+	            return false;
+	        }
+	        //vérification du email, retourne un booléen
+	        Matcher matcher = PATTERN.matcher(email);
+	        return matcher.matches();
+	    }
 
-	 public class Main {
-	     public static void main(String[] args) {
-	         EmailValidator validator = EmailValidator.getInstance();
-	         boolean isValid = validator.isValid("example@domain.com");
-	         System.out.println("Is valid: " + isValid);
-	     }
-	 }
-*/
 }
