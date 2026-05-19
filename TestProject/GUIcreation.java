@@ -17,7 +17,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JCheckBox[] boxCateg = {box1, box2, box3, box4, box5, box6};
 	JTextPane categories = new JTextPane();
 	JTextArea description = new JTextArea();
-	JScrollPane scrollPane = new JScrollPane(description);
+	JScrollPane descriptionScroll = new JScrollPane(description);
 	JTextPane descriptionInst = new JTextPane();
 	JButton butEnv = new JButton("Envoyer");
 	JButton butIT = new JButton("Mode IT");
@@ -28,11 +28,20 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JTextArea email = new JTextArea();
 	JScrollPane idScroll = new JScrollPane(id);
 	JScrollPane emailScroll = new JScrollPane(email);
+	Color myBlack = new Color(52, 53, 54);
+	Color myGreen = new Color(65, 181, 71);
 	boolean[] categTemp = new boolean[boxCateg.length]; //Boolean pour envoyer les valeurs des checkbox à l'objet
+	JComponent[] myArray = {categories, description, descriptionScroll, descriptionInst, butEnv, butIT, idInst, id, emailInst, email, idScroll, emailScroll};
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(700,500);
 		
+		//Assignation des couleurs
+		for(int i = 0; i < myArray.length; i++) {
+			myArray[i].setBackground(myBlack);
+			myArray[i].setForeground(myGreen);
+		}
+				
 		//Ajout du ActionListener
 		butEnv.addActionListener(this); 
 		butIT.addActionListener(this);
@@ -101,6 +110,8 @@ public class GUIcreation extends JFrame implements ActionListener{
 		for(int i=0; i<6; i++) {
 			gbc.gridy = i+1;
 			centerTopPanel.add(boxCateg[i], gbc);
+			boxCateg[i].setBackground(myBlack);
+			boxCateg [i].setForeground(myGreen);
 		}
 		
 		//Ajout des éléments au panneau haut
@@ -113,7 +124,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 		
 		gbc.gridy = 4;
 		gbc.weighty = 0.2;
-		centerPanel.add(scrollPane, gbc);
+		centerPanel.add(descriptionScroll, gbc);
 		
 		gbc.gridy = 5;
 		gbc.weighty = 0.1;
@@ -122,6 +133,15 @@ public class GUIcreation extends JFrame implements ActionListener{
 		gbc.gridy = 0;
 		gbc.weighty = 0.001;
 		centerPanel.add(butIT, gbc);
+		
+		
+		
+		
+		
+		
+		
+		
+
 		setVisible(true);
 		
 	}
@@ -139,7 +159,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	    	thisTicket.setCategories(categTemp);
 	    	    	thisTicket.setDescription(description.getText());
 	    	    	thisTicket.systemeAffiche();
-	    	    	thisTicket.creerTicket();
+	    	    	//thisTicket.creerTicket();
 	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    		} else {
 	    			invalidEntryStyle(descriptionInst);
