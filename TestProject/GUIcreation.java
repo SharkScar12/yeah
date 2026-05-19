@@ -134,11 +134,12 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    		if(isValid(email.getText()) == true) {
 	    			//C'est à la prochaine ligne où l'erreur serait dans le cas d'ID invalide.
 	    			thisTicket.setCompteID(Integer.parseInt(id.getText())); 
-	    	    	thisTicket.setEmail(email.getText());
+	    			prendCategories();
+	    			thisTicket.setEmail(email.getText());
 	    	    	thisTicket.setCategories(categTemp);
 	    	    	thisTicket.setDescription(description.getText());
 	    	    	thisTicket.systemeAffiche();
-	    	    	//thisTicket.creerTicket();
+	    	    	thisTicket.creerTicket();
 	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    		} else {
 	    			invalidEntryStyle(descriptionInst);
@@ -158,10 +159,12 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    }
 	}
+	
+	
 	//Méthode qui recueille les donnés des boîtes et associe à un booléan de l'objet.
 	//Appelée lorsque le bouton envoyer est cliqué et les entrés sont valides.
 	 public void prendCategories () {
-		    for (int i = 0; i > boxCateg.length; i++) {
+		    for (int i = 0; i < boxCateg.length; i++) {
 		      if (boxCateg[i].isSelected()) {
 		        categTemp[i] = true;
 		      } else {
