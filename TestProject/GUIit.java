@@ -120,11 +120,22 @@ public class GUIit extends JFrame implements ActionListener{
 			rightPanel.setBackground(Color.cyan);
 			
 			//Charger les 5 premiers billets de la page actuelle
-			for (int i = 0; i < 5; i++) {
-	            tabTicekt[i].lireTicketFicher("i" + (numTicket + i));
-	        }
 			totalTickets = getTotalTicket();
 			System.out.println("DEBUG totalTickets = " + totalTickets + ", numTicket = " + numTicket);
+			
+			//charger au plus 5 tickets, mais seulement jusqu’au dernier ticket existant
+			int toLoad = Math.min(5, totalTickets - numTicket + 1); //Calcule le nombre de billets disponibles sur cette page (entre 1 et 5), essay pas de charger un billet qui n'existe pas
+			
+			for (int i = 0; i < 5; i++) { // on garde toujours 5 tickets dans le tableau
+				if (i < toLoad) { //seulement les tickets existants
+		            tabTicekt[i].lireTicketFicher("i" + (numTicket + i));
+		        } else { //tickets invalides / inexistants → on met un ticket vide par défaut
+		            tabTicekt[i].setEmail("");
+		            tabTicekt[i].setDescription("");
+		            tabTicekt[i].setAffichage((byte) 0);
+		        }
+	        }
+			
 			//texte des boutons à partir des billets chargés
 			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
 			left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
@@ -219,9 +230,18 @@ public class GUIit extends JFrame implements ActionListener{
 		if (actionEvent.getSource() == prochainepage) {
 			numTicket = numTicket + 5;
 			
+			//refacturer le chargement de la page pour gérer les moins de 5 tickets
+			totalTickets = getTotalTicket();
+			int toLoad = Math.min(5, totalTickets - numTicket + 1);
 			for (int j = 0; j < 5; j++) {
-                tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
-            }
+				if (j < toLoad) {
+					tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
+				} else { 
+					tabTicekt[j].setEmail("");
+					tabTicekt[j].setDescription("");
+					tabTicekt[j].setAffichage((byte) 0);
+				}
+			}
 			
 			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
             left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
@@ -234,9 +254,18 @@ public class GUIit extends JFrame implements ActionListener{
 
 		    numTicket = numTicket - 5;
 
-		    for (int j = 0; j < 5; j++) {
-		        tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
-		    }
+		    //même logique pour la page précédente
+		    totalTickets = getTotalTicket();
+			int toLoad = Math.min(5, totalTickets - numTicket + 1);
+			for (int j = 0; j < 5; j++) {
+				if (j < toLoad) {
+					tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
+				} else { 
+					tabTicekt[j].setEmail("");
+					tabTicekt[j].setDescription("");
+					tabTicekt[j].setAffichage((byte) 0);
+				} 
+			}
 
 		    left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
 		    left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
@@ -247,7 +276,9 @@ public class GUIit extends JFrame implements ActionListener{
 		    updatePageButtons();
 		}
 		if (actionEvent.getSource() == (confirmeResolution)) {
-			tabTicekt[ticketresolu].setAffichage((byte) 0);
+			if (ticketresolu >= 1 && ticketresolu <= totalTickets) {
+				tabTicekt[ticketresolu - numTicket].setAffichage((byte) 0);
+			}
 		}
 	}
 	public void afficheProbleme(int nombreTicket) {
@@ -258,9 +289,10 @@ public class GUIit extends JFrame implements ActionListener{
 	}
 	
 	private void updatePageButtons() {
-		pageprecedente.setEnabled(numTicket > 1);                   // Activer seulement si ce n'est pas la première page
-		prochainepage.setEnabled(numTicket + 5 <= totalTickets);     // Activer seulement si la page suivante existe
-    }
+		pageprecedente.setEnabled(numTicket > 1); // Activer seulement si ce n'est pas la première page
+		prochainepage.setEnabled(numTicket + 5 - 1 < totalTickets);
+		//on veut qu’on puisse aller à la page suivante si *au moins un ticket existe* après ces 5
+	}
 
 }
 	
