@@ -261,8 +261,9 @@ public class GUIit extends JFrame implements ActionListener{
 					tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
 				} else { 
 					tabTicekt[j].setEmail("");
-					tabTicekt[j].setDescription("");
-					tabTicekt[j].setAffichage((byte) 0);
+					tabTicekt[j].setDescription("Aucun ticket");
+					//problème que les ticket non-résolus son affichés comme résolus après avoir changé de page
+					//tabTicekt[j].setAffichage((byte) 0);
 				}
 			}
 			
@@ -285,8 +286,10 @@ public class GUIit extends JFrame implements ActionListener{
 					tabTicekt[j].lireTicketFicher("i" + (numTicket + j));
 				} else { 
 					tabTicekt[j].setEmail("");
-					tabTicekt[j].setDescription("");
-					tabTicekt[j].setAffichage((byte) 0);
+					tabTicekt[j].setDescription("Aucun ticket");
+					//problème que les ticket non-résolus son affichés comme résolus après avoir changé de page
+					//tabTicekt[j].setAffichage((byte) 0);
+
 				} 
 			}
 
