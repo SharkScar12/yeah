@@ -175,7 +175,7 @@ public class GUIit extends JFrame implements ActionListener{
 	//les Action Listeners pour sélectionner les tickets de l'affichage rapide
 	public void actionPerformed (ActionEvent actionEvent ) {
 		int i = 0;
-		ticketresolu = 0;
+		
 		System.out.println(ticketresolu);
 		String[] affichage = {"Problème d'alimentation : ", "Câble brisé : ","Écran brisé : ", "Batterie défectueuse : ", "Ne s'allume pas : ", "Problème logiciel : "};
 		
@@ -188,6 +188,7 @@ public class GUIit extends JFrame implements ActionListener{
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[0].getDescription());
+				ticketresolu = 0;
 				ticketresolu = numTicket;
 				System.out.println(ticketresolu);
 			} else {
@@ -202,6 +203,7 @@ public class GUIit extends JFrame implements ActionListener{
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[1].getDescription());
+				ticketresolu = 0;
 				ticketresolu = numTicket + 1;
 				System.out.println(ticketresolu);
 			} else {
@@ -216,6 +218,7 @@ public class GUIit extends JFrame implements ActionListener{
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[2].getDescription());
+				ticketresolu = 0;
 				ticketresolu = numTicket + 2;
 				System.out.println(ticketresolu);
 			} else {
@@ -230,6 +233,7 @@ public class GUIit extends JFrame implements ActionListener{
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[3].getDescription());
+				ticketresolu = 0;
 				ticketresolu = numTicket + 3;
 				System.out.println(ticketresolu);
 			} else {
@@ -244,6 +248,7 @@ public class GUIit extends JFrame implements ActionListener{
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[4].getDescription());
+				ticketresolu = 0;
 				ticketresolu = numTicket + 4;
 				System.out.println(ticketresolu);
 			} else {
@@ -302,8 +307,10 @@ public class GUIit extends JFrame implements ActionListener{
 		    updatePageButtons();
 		}
 		if (actionEvent.getSource() == (confirmeResolution)) {
+			
+			
 			if (ticketresolu >= 1 && ticketresolu <= totalTickets) {
-				tabTicekt[ticketresolu - numTicket].setAffichage((byte) 0);
+				tabTicekt[ticketresolu - numTicket].setAffichage((byte)0);
 			}
 		}
 	}
