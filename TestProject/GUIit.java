@@ -63,33 +63,51 @@ public class GUIit extends JFrame implements ActionListener{
 	
 	public GUIit () {
 			super ("GUIit");
-			setSize(500,500);
+			setSize(600,500);
 			getContentPane().setLayout(new GridLayout(1,2));
 			this.add(leftPanel);
 			this.add(rightPanel);
-			rightPanel.setBackground(Color.yellow);
-			rightBottomPanel.setBackground(Color.blue);
-			rightBottomPanel.setLayout(new GridLayout(1,2));
-			left3.setBackground(Color.RED);
-			leftTop.setBackground(Color.green);
+			
+			
+			//rightPanel.setBackground(new Color(177, 204, 230));
+			//description.setBackground(new Color(177, 204, 230));
+			
+			
+			rightBottomPanel.setLayout(new GridLayout(1,2));		
+			
+			
 			leftPanel.setLayout(new GridLayout(6,1));
 			leftPanel.add(leftTop);
+			//leftTop.setLayout(new FlowLayout());
 			leftTop.setLayout(new GridLayout(1,2));
+			
 			leftTop.add(pageprecedente);
-			pageprecedente.setText("Page précédente");
-			leftTop.add(prochainepage);
-			prochainepage.setText("Prochaine page");
-			prochainepage.addActionListener(this);
+			pageprecedente.setText("<--");
 			pageprecedente.addActionListener(this);
+			pageprecedente.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
+			pageprecedente.setBackground(new Color(24, 55, 84));
+		    pageprecedente.setForeground(Color.WHITE);
+			
+			leftTop.add(prochainepage);
+			prochainepage.setText("-->");
+			prochainepage.addActionListener(this);
+			prochainepage.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
+			prochainepage.setBackground(new Color(24, 55, 84));
+		    prochainepage.setForeground(Color.WHITE);
+
 			leftPanel.add(left1);
 			left1.setText("");
 			left1.addActionListener(this);
+			
 			leftPanel.add(left2);
 			left2.addActionListener(this);
+			
 			leftPanel.add(left3);
 			left3.addActionListener(this);
+			
 			leftPanel.add(left4);
 			left4.addActionListener(this);
+			
 			leftPanel.add(left5);
 			left5.addActionListener(this);
 
@@ -109,15 +127,20 @@ public class GUIit extends JFrame implements ActionListener{
 
 
 			description.setEditable(false);
-			rightPanel.add(description);
-			notes.setLineWrap(true);
-			rightBottomPanel.add(scrollPane);
-			rightBottomPanel.add(confirmeResolution);
-			confirmeResolution.addActionListener(this);
-			confirmeResolution.setText("Soummetre la résolution");
-			rightPanel.add(rightBottomPanel);
-			leftPanel.setBackground(Color.green);
-			rightPanel.setBackground(Color.cyan);
+		    rightPanel.add(description);
+		        
+		    notes.setLineWrap(true);
+	        
+	        rightBottomPanel.setLayout(new GridLayout(1,2));
+	        rightBottomPanel.add(scrollPane);
+	        rightBottomPanel.add(confirmeResolution);
+	        
+	        confirmeResolution.addActionListener(this);
+	        confirmeResolution.setText("Résolu");
+	        confirmeResolution.setBackground(new Color(24, 55, 84));
+		    confirmeResolution.setForeground(Color.WHITE);
+	        
+	        rightPanel.add(rightBottomPanel);
 			
 			//Charger les 5 premiers billets de la page actuelle
 			totalTickets = getTotalTicket();
@@ -137,11 +160,11 @@ public class GUIit extends JFrame implements ActionListener{
 	        }
 			
 			//texte des boutons à partir des billets chargés
-			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
-			left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
-			left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
-			left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
-			left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+			left1.setText("<html>" + tabTicekt[0].getEmail() + "<br> | " + tabTicekt[0].getDescription() + "</html>");
+			left2.setText("<html>" + tabTicekt[1].getEmail() + "<br> | " + tabTicekt[1].getDescription() + "</html>" );
+			left3.setText("<html>" + tabTicekt[2].getEmail() + "<br> | " + tabTicekt[2].getDescription() + "</html>");
+			left4.setText("<html>" + tabTicekt[3].getEmail() + "<br> | " + tabTicekt[3].getDescription() + "</html>");
+			left5.setText("<html>" + tabTicekt[4].getEmail() + "<br> | " + tabTicekt[4].getDescription() + "</html>");
 			
 			updatePageButtons();
 			
@@ -243,11 +266,11 @@ public class GUIit extends JFrame implements ActionListener{
 				}
 			}
 			
-			left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
-            left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
-            left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
-            left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
-            left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+			left1.setText("<html>" + tabTicekt[0].getEmail() + "<br> | " + tabTicekt[0].getDescription() + "</html>");
+			left2.setText("<html>" + tabTicekt[1].getEmail() + "<br> | " + tabTicekt[1].getDescription() + "</html>" );
+			left3.setText("<html>" + tabTicekt[2].getEmail() + "<br> | " + tabTicekt[2].getDescription() + "</html>");
+			left4.setText("<html>" + tabTicekt[3].getEmail() + "<br> | " + tabTicekt[3].getDescription() + "</html>");
+			left5.setText("<html>" + tabTicekt[4].getEmail() + "<br> | " + tabTicekt[4].getDescription() + "</html>");
             updatePageButtons();
 		}
 		if (actionEvent.getSource() == pageprecedente) {
@@ -267,11 +290,11 @@ public class GUIit extends JFrame implements ActionListener{
 				} 
 			}
 
-		    left1.setText(tabTicekt[0].getEmail() + " | " + tabTicekt[0].getDescription());
-		    left2.setText(tabTicekt[1].getEmail() + " | " + tabTicekt[1].getDescription());
-		    left3.setText(tabTicekt[2].getEmail() + " | " + tabTicekt[2].getDescription());
-		    left4.setText(tabTicekt[3].getEmail() + " | " + tabTicekt[3].getDescription());
-		    left5.setText(tabTicekt[4].getEmail() + " | " + tabTicekt[4].getDescription());
+			left1.setText("<html>" + tabTicekt[0].getEmail() + "<br> | " + tabTicekt[0].getDescription() + "</html>");
+			left2.setText("<html>" + tabTicekt[1].getEmail() + "<br> | " + tabTicekt[1].getDescription() + "</html>" );
+			left3.setText("<html>" + tabTicekt[2].getEmail() + "<br> | " + tabTicekt[2].getDescription() + "</html>");
+			left4.setText("<html>" + tabTicekt[3].getEmail() + "<br> | " + tabTicekt[3].getDescription() + "</html>");
+			left5.setText("<html>" + tabTicekt[4].getEmail() + "<br> | " + tabTicekt[4].getDescription() + "</html>");
 
 		    updatePageButtons();
 		}
