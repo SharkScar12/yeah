@@ -40,7 +40,7 @@ envoyerEmail() : String
     this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     this.categories = new boolean[] 
       {false, false, false, false, false, false, false, false};
-    this.affichage = 0;
+    this.affichage = 1;
   }
   
   //Constructeur structuré de TicketReparation

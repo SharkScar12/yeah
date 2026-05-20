@@ -160,7 +160,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	    	thisTicket.setCategories(categTemp);
 	    	    	thisTicket.setDescription(description.getText());
 	    	    	thisTicket.systemeAffiche();
-	    	    	//thisTicket.creerTicket();
+	    	    	thisTicket.creerTicket();
 	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    		} else {
 	    			invalidEntryStyle(descriptionInst);

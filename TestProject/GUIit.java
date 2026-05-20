@@ -311,6 +311,7 @@ public class GUIit extends JFrame implements ActionListener{
 			
 			if (ticketresolu >= 1 && ticketresolu <= totalTickets) {
 				tabTicekt[ticketresolu - numTicket].setAffichage((byte)0);
+				description.setText("Ticket Résolu");
 			}
 		}
 	}

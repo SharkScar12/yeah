@@ -9,3 +9,6 @@ i8;0;roujea08@ecolecatholique.ca;this is world;false;true;true;false;false;true;
 i9;0;roujea08@ecolecatholique.ca;this is bad;false;true;true;false;false;true;1
 i10;0;roujea08@ecolecatholique.ca;this is wholesome;false;true;true;false;false;true;1
 i11;1234567;e@e.co;BingChilling [x2];false;false;true;false;true;false;0
+i12;7524;e@r.com;eeee;false;false;false;true;false;true;0
+i13;542;e@r.re;;false;false;true;false;false;true;0
+i14;3643;e@e.rt;rwr;false;true;false;true;false;false;1
