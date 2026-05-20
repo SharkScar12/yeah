@@ -36,7 +36,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(700,500);
-		
+		setLocationRelativeTo(null);
 		//Assignation des couleurs. Était une boucle avant.
 		for(int i = 0; i < myArray.length; i++) {
 			myArray[i].setBackground(myBlue);
