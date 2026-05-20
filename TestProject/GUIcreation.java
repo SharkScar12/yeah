@@ -163,17 +163,19 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    	    	thisTicket.creerTicket();
 	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    		} else {
+	    			//chaneg les styles pour indiquer le problème
 	    			invalidEntryStyle(descriptionInst);
 	    			descriptionInst.setText("Insérez un adress courriel valide!");
 	    			email.setBackground(Color.yellow);
 	    		}
-	    	
+	    	//catch
 	    	} catch(NumberFormatException f) {
+	    		invalidEntryStyle(descriptionInst);
 	    		descriptionInst.setText("Assurez-vous de remplir votre ID d'étudiant!");
 	    		id.setBackground(Color.yellow);
 	    		System.out.println("e");
 	    	}
-	    	
+	    	//Change au mode it et ferme GUI Création
 	    } else if (e.getSource() == butIT) {
 	    	System.out.println("butIT");
 			GUIit testing2 = new GUIit();
