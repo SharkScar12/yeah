@@ -192,7 +192,7 @@ envoyerEmail() : String
         String info = lecteurTicket.nextLine(); 
         //Detection de l'ID du ticket dans la ligne complete
         if (info.contains(tickID)) { 
-          System.out.println("Found match: " + info); 
+          //debug: System.out.println("Found match: " + info);
           String[] ticketLn = info.split(";");
           //Assure que l'ID trouver etait dans la section de ticketID
           if (ticketLn[0].equals(tickID)) {
@@ -229,7 +229,7 @@ envoyerEmail() : String
     this.categories = categ;
     this.affichage = Byte.parseByte(tickLn[tickLn.length - 1]);
     //Affiche les nouvelles informations
-    systemeAffiche();
+    //systemeAffiche();
   }
 
 
@@ -246,7 +246,7 @@ envoyerEmail() : String
         }
         monWriter.println("i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + affichage);
         monWriter.close();
-        System.out.println("Ecrit dans ticket.txt : i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + affichage);
+        //System.out.println("Ecrit dans ticket.txt : i" + totalTicket + ";" + super.getCompteID() + ";" + super.getEmail() +  ";" + description + ";" + categStr + affichage);
           
     	} catch (IOException e) {
 		    System.out.println("Il y a eu une erreur.");
@@ -254,9 +254,10 @@ envoyerEmail() : String
 		  }
   }
   
+  //méthode débuggage
   public void systemeAffiche () {
-	  System.out.println("Information du ticket : " + ticketID);
-	  System.out.println("ID du compte : " + super.getCompteID() + "\nEmail du compte : " + super.getEmail() +  "\nDescription : " + description + "\nCategories : " + categories + "\nAffichage : " + affichage);
+	  //System.out.println("Information du ticket : " + ticketID);
+	  //System.out.println("ID du compte : " + super.getCompteID() + "\nEmail du compte : " + super.getEmail() +  "\nDescription : " + description + "\nCategories : " + categories + "\nAffichage : " + affichage);
   }
 
 }

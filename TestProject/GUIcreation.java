@@ -28,8 +28,6 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JTextArea email = new JTextArea();
 	JScrollPane idScroll = new JScrollPane(id);
 	JScrollPane emailScroll = new JScrollPane(email);
-	Color myBlack = new Color(52, 53, 54);
-	Color myGreen = new Color(65, 181, 71);
 	Color myBlue = new Color(24, 55, 84);
 	boolean[] categTemp = new boolean[boxCateg.length]; //Boolean pour envoyer les valeurs des checkbox à l'objet
 	JComponent[] myArray = {butEnv};
@@ -37,7 +35,7 @@ public class GUIcreation extends JFrame implements ActionListener{
 		super ("GUIcreation");
 		setSize(700,500);
 		setLocationRelativeTo(null);
-		//Assignation des couleurs. Était une boucle avant.
+		//Assignation des couleurs. Était une boucle avant que la couleur a été changé. Laissé pour si le thème change dans le futur.
 		for(int i = 0; i < myArray.length; i++) {
 			myArray[i].setBackground(myBlue);
 			myArray[i].setForeground(Color.white);
@@ -111,11 +109,9 @@ public class GUIcreation extends JFrame implements ActionListener{
 		for(int i=0; i<6; i++) {
 			gbc.gridy = i+1;
 			centerTopPanel.add(boxCateg[i], gbc);
-			//boxCateg[i].setBackground(myBlack);
-			//boxCateg [i].setForeground(myGreen);
 		}
 		
-		//Ajout des éléments au panneau haut
+		//Ajout des éléments au panneau centre
 		gbc.gridy = 2;
 		centerPanel.add(centerTopPanel, gbc);
 		
@@ -159,11 +155,11 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    			thisTicket.setEmail(email.getText());
 	    	    	thisTicket.setCategories(categTemp);
 	    	    	thisTicket.setDescription(description.getText());
-	    	    	thisTicket.systemeAffiche();
+	    	    	//thisTicket.systemeAffiche();
 	    	    	thisTicket.creerTicket();
 	    	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    		} else {
-	    			//chaneg les styles pour indiquer le problème
+	    			//change les styles pour indiquer le problème
 	    			invalidEntryStyle(descriptionInst);
 	    			descriptionInst.setText("Insérez un adress courriel valide!");
 	    			email.setBackground(Color.yellow);
@@ -173,11 +169,11 @@ public class GUIcreation extends JFrame implements ActionListener{
 	    		invalidEntryStyle(descriptionInst);
 	    		descriptionInst.setText("Assurez-vous de remplir votre ID d'étudiant!");
 	    		id.setBackground(Color.yellow);
-	    		System.out.println("e");
+	    		//System.out.println("e");
 	    	}
-	    	//Change au mode it et ferme GUI Création
+	    	//Ouvre le gui pour le mode IT et ferme GUI Création. Protection mot-passe possible dans le future.
 	    } else if (e.getSource() == butIT) {
-	    	System.out.println("butIT");
+	    	//System.out.println("butIT");
 			GUIit testing2 = new GUIit();
 	    	this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    }
@@ -207,6 +203,9 @@ public class GUIcreation extends JFrame implements ActionListener{
 	 	//https://stackoverflow.com/questions/8204680/java-regex-email
 	 	//paramêtres des charectères
 	 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+	 	//^[a-zA-Z0-9._%+-] = ces charectères sont permis avant le @
+	 	//+@[a-zA-Z0-9.-] = indique qu'un @ doit être présent suivi par au moins un des prochaines charectères
+	 	//+\\.[a-zA-Z]{2,6}$ = \\. indique qu'il doit avoir un point, et les charactères de az ou A-Z et y avoir 2 à 6.
 	 	//associe à l'objet qui fait la vérification
 	    private static final Pattern PATTERN = Pattern.compile(EMAIL_REGEX);
 	    //vérifie si la boîte est null, dans ce cas c'est toujour invalide

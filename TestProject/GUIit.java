@@ -64,55 +64,26 @@ public class GUIit extends JFrame implements ActionListener{
 	public GUIit () {
 			super ("GUIit");
 			setSize(600,500);
+			setLocationRelativeTo(null);
 			getContentPane().setLayout(new GridLayout(1,2));
 			this.add(leftPanel);
-			this.add(rightPanel);
+			this.add(rightPanel);	
 			
-			
-			//rightPanel.setBackground(new Color(177, 204, 230));
-			//description.setBackground(new Color(177, 204, 230));
-			
-			
+			//Création des Layout
 			rightBottomPanel.setLayout(new GridLayout(1,2));		
-			
-			
 			leftPanel.setLayout(new GridLayout(6,1));
-			leftPanel.add(leftTop);
-			//leftTop.setLayout(new FlowLayout());
 			leftTop.setLayout(new GridLayout(1,2));
-			
-			leftTop.add(pageprecedente);
-			pageprecedente.setText("<--");
-			pageprecedente.addActionListener(this);
-			pageprecedente.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
-			pageprecedente.setBackground(new Color(24, 55, 84));
-		    pageprecedente.setForeground(Color.WHITE);
-			
-			leftTop.add(prochainepage);
-			prochainepage.setText("-->");
-			prochainepage.addActionListener(this);
-			prochainepage.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
-			prochainepage.setBackground(new Color(24, 55, 84));
-		    prochainepage.setForeground(Color.WHITE);
-
-			leftPanel.add(left1);
-			left1.setText("");
-			left1.addActionListener(this);
-			
-			leftPanel.add(left2);
-			left2.addActionListener(this);
-			
-			leftPanel.add(left3);
-			left3.addActionListener(this);
-			
-			leftPanel.add(left4);
-			left4.addActionListener(this);
-			
-			leftPanel.add(left5);
-			left5.addActionListener(this);
-
 			rightPanel.setLayout(new GridLayout(8,1));
-			for(int i = 0; i<6; i++) {
+	        rightBottomPanel.setLayout(new GridLayout(1,2));
+
+			leftPanel.add(leftTop);
+			
+			//Assignation du text initial
+			pageprecedente.setText("<--");
+			prochainepage.setText("-->");
+			left1.setText("");
+	        confirmeResolution.setText("Résolu");
+	        for(int i = 0; i<6; i++) {
 				infos[i] = new JLabel();
 			}
 			infos[0].setText("Les problèmes");
@@ -121,30 +92,52 @@ public class GUIit extends JFrame implements ActionListener{
 			infos[3].setText("Serons");
 			infos[4].setText("Affichés");
 			infos[5].setText("Ici!");
+
+			
+			//Mise en forme du texte et éléments et paramètres
+			pageprecedente.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
+			pageprecedente.setBackground(new Color(24, 55, 84));
+		    pageprecedente.setForeground(Color.WHITE);
+			prochainepage.setFont(new Font("HelveticaNeue", Font.BOLD, 25));
+			prochainepage.setBackground(new Color(24, 55, 84));
+		    prochainepage.setForeground(Color.WHITE);
+		    confirmeResolution.setBackground(new Color(24, 55, 84));
+		    confirmeResolution.setForeground(Color.WHITE);
+			description.setEditable(false);
+		    notes.setLineWrap(true);
+
+			
+		    //Ajout des actionListener
+			prochainepage.addActionListener(this);
+		    pageprecedente.addActionListener(this);
+			left1.addActionListener(this);
+			left2.addActionListener(this);
+			left3.addActionListener(this);
+			left4.addActionListener(this);
+			left5.addActionListener(this);
+	        confirmeResolution.addActionListener(this);
+		    
+	        //Ajout des éléments au GUI
+		    leftTop.add(pageprecedente);
+		    leftTop.add(prochainepage);
+			leftPanel.add(left1);
+			leftPanel.add(left2);
+			leftPanel.add(left3);
+			leftPanel.add(left4);
+			leftPanel.add(left5);
 			for(int i = 0; i<6; i++) {
 				rightPanel.add(infos[i]);
 			}
-
-
-			description.setEditable(false);
 		    rightPanel.add(description);
-		        
-		    notes.setLineWrap(true);
-	        
-	        rightBottomPanel.setLayout(new GridLayout(1,2));
 	        rightBottomPanel.add(scrollPane);
 	        rightBottomPanel.add(confirmeResolution);
-	        
-	        confirmeResolution.addActionListener(this);
-	        confirmeResolution.setText("Résolu");
-	        confirmeResolution.setBackground(new Color(24, 55, 84));
-		    confirmeResolution.setForeground(Color.WHITE);
-	        
 	        rightPanel.add(rightBottomPanel);
 			
+	        
+	        
 			//Charger les 5 premiers billets de la page actuelle
 			totalTickets = getTotalTicket();
-			System.out.println("DEBUG totalTickets = " + totalTickets + ", numTicket = " + numTicket);
+			//debug: System.out.println("DEBUG totalTickets = " + totalTickets + ", numTicket = " + numTicket);
 			
 			//charger au plus 5 tickets, mais seulement jusqu’au dernier ticket existant
 			int toLoad = Math.min(5, totalTickets - numTicket + 1); //Calcule le nombre de billets disponibles sur cette page (entre 1 et 5), essay pas de charger un billet qui n'existe pas
@@ -176,10 +169,12 @@ public class GUIit extends JFrame implements ActionListener{
 	public void actionPerformed (ActionEvent actionEvent ) {
 		int i = 0;
 		
-		System.out.println(ticketresolu);
+		//System.out.println(ticketresolu);
 		String[] affichage = {"Problème d'alimentation : ", "Câble brisé : ","Écran brisé : ", "Batterie défectueuse : ", "Ne s'allume pas : ", "Problème logiciel : "};
 		
+		//5 structures if, véfient la source du clique
 		if (actionEvent.getSource() == left1) {
+			
 			//cheker si le ticket est résolu ou non
 			if (tabTicekt[0].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[0].getCategories();
@@ -190,7 +185,7 @@ public class GUIit extends JFrame implements ActionListener{
 				description.setText(tabTicekt[0].getDescription());
 				ticketresolu = 0;
 				ticketresolu = numTicket;
-				System.out.println(ticketresolu);
+				//System.out.println(ticketresolu);
 			} else {
 				description.setText("Ticket Résolu");
 			}
@@ -198,14 +193,14 @@ public class GUIit extends JFrame implements ActionListener{
 		if (actionEvent.getSource() == left2) {
 			if (tabTicekt[1].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[1].getCategories();
-				System.out.println(affiche[1]);
+				//System.out.println(affiche[1]);
 				for ( i = 0; i <6; i++) {
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[1].getDescription());
 				ticketresolu = 0;
 				ticketresolu = numTicket + 1;
-				System.out.println(ticketresolu);
+				//System.out.println(ticketresolu);
 			} else {
 				description.setText("Ticket Résolu");
 			}
@@ -213,14 +208,14 @@ public class GUIit extends JFrame implements ActionListener{
 		if (actionEvent.getSource() == left3) {
 			if (tabTicekt[2].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[2].getCategories();
-				System.out.println(affiche[1]);
+				//System.out.println(affiche[1]);
 				for ( i = 0; i <6; i++) {
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[2].getDescription());
 				ticketresolu = 0;
 				ticketresolu = numTicket + 2;
-				System.out.println(ticketresolu);
+				//System.out.println(ticketresolu);
 			} else {
 				description.setText("Ticket Résolu");
 			}
@@ -228,14 +223,14 @@ public class GUIit extends JFrame implements ActionListener{
 		if (actionEvent.getSource() == left4) {
 			if (tabTicekt[3].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[3].getCategories();
-				System.out.println(affiche[1]);
+				//System.out.println(affiche[1]);
 				for ( i = 0; i <6; i++) {
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[3].getDescription());
 				ticketresolu = 0;
 				ticketresolu = numTicket + 3;
-				System.out.println(ticketresolu);
+				//System.out.println(ticketresolu);
 			} else {
 				description.setText("Ticket Résolu");
 			}
@@ -243,14 +238,14 @@ public class GUIit extends JFrame implements ActionListener{
 		if (actionEvent.getSource() == left5) {
 			if (tabTicekt[4].getAffichage() == 1) {
 				boolean[] affiche = tabTicekt[4].getCategories();
-				System.out.println(affiche[1]);
+				//System.out.println(affiche[1]);
 				for ( i = 0; i <6; i++) {
 					infos[i].setText(String.valueOf(affichage[i] + affiche[i]));
 				}
 				description.setText(tabTicekt[4].getDescription());
 				ticketresolu = 0;
 				ticketresolu = numTicket + 4;
-				System.out.println(ticketresolu);
+				//System.out.println(ticketresolu);
 			} else {
 				description.setText("Ticket Résolu");
 			}
