@@ -30,16 +30,17 @@ public class GUIcreation extends JFrame implements ActionListener{
 	JScrollPane emailScroll = new JScrollPane(email);
 	Color myBlack = new Color(52, 53, 54);
 	Color myGreen = new Color(65, 181, 71);
+	Color myBlue = new Color(24, 55, 84);
 	boolean[] categTemp = new boolean[boxCateg.length]; //Boolean pour envoyer les valeurs des checkbox à l'objet
-	JComponent[] myArray = {categories, description, descriptionScroll, descriptionInst, butEnv, butIT, idInst, id, emailInst, email, idScroll, emailScroll};
+	JComponent[] myArray = {butEnv};
 	public GUIcreation () {
 		super ("GUIcreation");
 		setSize(700,500);
 		
-		//Assignation des couleurs
+		//Assignation des couleurs. Était une boucle avant.
 		for(int i = 0; i < myArray.length; i++) {
-			myArray[i].setBackground(myBlack);
-			myArray[i].setForeground(myGreen);
+			myArray[i].setBackground(myBlue);
+			myArray[i].setForeground(Color.white);
 		}
 				
 		//Ajout du ActionListener
@@ -110,8 +111,8 @@ public class GUIcreation extends JFrame implements ActionListener{
 		for(int i=0; i<6; i++) {
 			gbc.gridy = i+1;
 			centerTopPanel.add(boxCateg[i], gbc);
-			boxCateg[i].setBackground(myBlack);
-			boxCateg [i].setForeground(myGreen);
+			//boxCateg[i].setBackground(myBlack);
+			//boxCateg [i].setForeground(myGreen);
 		}
 		
 		//Ajout des éléments au panneau haut
